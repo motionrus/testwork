@@ -3,27 +3,13 @@ from django.forms import ModelForm
 
 from django import forms
 from .models import *
-'''
-class AuthorAdmin(admin.ModelAdmin):
-    pass
-admin.site.register(Question)
-admin.site.register(Choice)
 
-'''
 
 def make_published(modeladmin, request, queryset):
     print (request)
     queryset.update(status='p')
 make_published.short_description = "Mark selected stories as published"
-'''
-def test(self, db_field, request, **kwargs):
-    #state = get_queryset(request)
-    kwargs['choices'] = (
-            ('New', 'Новый'),
-            ('Active', 'Активный'),
-        )
-    return super(QuestionChoice, self).formfield_for_choice_field(db_field, request, **kwargs)
-'''
+
 class ArticleAdmin(admin.ModelAdmin):
     list_display = ['title', 'status']
     ordering = ['title']
@@ -92,17 +78,6 @@ class QuestionChoice(admin.ModelAdmin):
                 ('Ended', 'Конечный'),
             )  
         return super(QuestionChoice, self).formfield_for_choice_field(db_field, request, **kwargs)
-'''
-    def formfield_for_choice_field(self, db_field, request, **kwargs):
-        #state = get_queryset(request)
-        state = '1'
-        if state == "Question":
-            kwargs['choices'] = (
-                ('New', 'Новый'),
-                ('Active', 'Активный'),
-            )
-        return super(QuestionChoice, self).formfield_for_choice_field(db_field, request, **kwargs)
 
-'''
 #admin.site.register(Article, ArticleAdmin)
 admin.site.register(Question, QuestionChoice)
